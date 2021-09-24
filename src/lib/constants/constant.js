@@ -1,0 +1,1 @@
+export const USER_LOCALSTORAE_KEY = 'USER_AUTH_REACT';

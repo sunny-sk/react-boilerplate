@@ -1,0 +1,52 @@
+.overlay {
+  position: fixed;
+  z-index: 999999;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  overflow-y: hidden;
+  opacity: 1;
+}
+
+.content {
+  position: absolute;
+  top: 20%;
+  z-index: 9999999;
+  left: 50%;
+  height: 400px;
+  max-width: 500px;
+  width: 100%;
+  transform: translateX(-50%);
+  background: #ffff;
+  border-radius: 5px;
+}
+
+.animate {
+  opacity: 1;
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    top: -100%;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.reAnimate {
+  opacity: 1;
+  animation: fadeOut 0.5s;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
