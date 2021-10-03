@@ -1,11 +1,12 @@
 import { Page } from 'components';
 import React from 'react';
-const NotFound = () => {
+
+const Home = () => {
   return (
     <Page>
-      <h1>Page not found</h1>
+      <h1>Home page</h1>
     </Page>
   );
 };
 
-export default NotFound;
+export default Home;

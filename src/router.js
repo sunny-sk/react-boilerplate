@@ -1,30 +1,79 @@
-import { NotFound } from 'pages';
+/* eslint-disable react/prop-types */
+import { RouteList } from 'components';
+import { Home, NotFound } from 'pages';
 import React, { Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom';
 
-// protected route
-// const publicPaths = [];
-export const ProtectedRoute = () => {};
+const PATHS = [
+  {
+    path: '/',
+    exact: true,
+    public: true,
+    component: Home,
+    // redirectUrl: '/dashboard/me',
+  },
+  {
+    path: '/signin',
+    exact: true,
+    public: true,
+    component: (
+      <>
+        <p>Signin</p>
+      </>
+    ),
+  },
+  {
+    path: '/signup',
+    exact: true,
+    public: false,
+    component: (
+      <>
+        <p>signup</p>
+      </>
+    ),
+  },
+  {
+    path: '/dashboard',
+    exact: false,
+    public: false,
+    component: (
+      <RouteList
+        PATHS={[
+          {
+            path: '/dashboard/',
+            exact: true,
+            public: false,
+            component: (
+              <>
+                <p>dashboard</p>
+              </>
+            ),
+          },
+          {
+            path: '/dashboard/me',
+            exact: true,
+            public: true,
+            component: (
+              <>
+                <p>me</p>
+              </>
+            ),
+          },
+        ]}
+      />
+    ),
+  },
+  {
+    path: '**',
+    exact: true,
+    notFound: true,
+    component: NotFound,
+  },
+];
 
-// import NotFound from 'screens/404/NotFound';
-// lazy loaded components
-
-// const LazyCounter = React.lazy(() => import('screens/Counter/Counter'));
-// const LazyUserProfile = React.lazy(() => import('screens/Profile/UserProfile'));
-// const NotFound = React.lazy(() => import('screens/404/NotFound'));
 const Router = () => {
   return (
     <Suspense fallback={<h1>Loading lazy component ... </h1>}>
-      <Switch>
-        <Route path="/" exact>
-          <center>
-            <p style={{ color: 'white' }}>Home</p>
-          </center>
-        </Route>
-        <Route exact>
-          <NotFound />
-        </Route>
-      </Switch>
+      <RouteList PATHS={PATHS} />
     </Suspense>
   );
 };
