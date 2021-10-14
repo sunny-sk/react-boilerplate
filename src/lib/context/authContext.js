@@ -27,12 +27,12 @@ export const AuthProvider = ({ children }) => {
       // Try get the data from Local Storage
       const _authData = getItem(USER_LOCALSTORAE_KEY);
       if (_authData) {
-        const { error, data } = {}; // call webIndex api here
+        const { error } = { error: null }; // call webIndex api here
         if (error) {
           showError('Session Expired, Please login again');
           setLoading(false);
         } else {
-          signIn({ ..._authData, ...data.data });
+          signIn({ ..._authData });
           setLoading(false);
         }
       } else {

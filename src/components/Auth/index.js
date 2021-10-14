@@ -15,7 +15,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
     return (
       <Redirect
         to={{
-          pathname: '/signin',
+          pathname: '/login',
           search: `?redirect=${encodeURIComponent(rest.location.pathname)}`,
         }}
       />
@@ -28,11 +28,7 @@ export const RouteList = ({ PATHS }) => {
     <Switch>
       {PATHS.map((path) => {
         if (path.notFound) {
-          return (
-            <Route exact key={path.path}>
-              {path.component}
-            </Route>
-          );
+          return <Route exact key={path.path} component={path.component} />;
         } else {
           if (!path.public) {
             return (
@@ -44,15 +40,18 @@ export const RouteList = ({ PATHS }) => {
               />
             );
           } else {
-            return (
-              <Route path={path.path} key={path.path} exact={path.exact}>
-                {path.redirectUrl ? (
-                  <Redirect to={path.redirectUrl} />
-                ) : (
-                  path.component
-                )}
-              </Route>
-            );
+            if (path.redirectUrl) {
+              return <Redirect to={path.redirectUrl} />;
+            } else {
+              return (
+                <Route
+                  path={path.path}
+                  key={path.path}
+                  exact={path.exact}
+                  component={path.component}
+                />
+              );
+            }
           }
         }
       })}

@@ -1,14 +1,17 @@
 /* eslint-disable no-unused-vars */
 import { ErrorBoundary } from 'components';
 import { AuthProvider } from 'lib/context/authContext';
+import { LangProvider } from 'lib/context/langContext';
 import React from 'react';
 import Router from 'router';
 function App() {
   return (
     <ErrorBoundary>
-      <AuthProvider>
-        <Router />
-      </AuthProvider>
+      <LangProvider>
+        <AuthProvider>
+          <Router />
+        </AuthProvider>
+      </LangProvider>
     </ErrorBoundary>
   );
 }

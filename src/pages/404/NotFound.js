@@ -1,11 +1,8 @@
 import { Page } from 'components';
 import React from 'react';
+
 const NotFound = () => {
-  return (
-    <Page>
-      <h1>Page not found</h1>
-    </Page>
-  );
+  return <Page>Page not found</Page>;
 };
 
 export default NotFound;

@@ -1,4 +1,5 @@
 import './index.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import React from 'react';
 import { render } from 'react-dom';
