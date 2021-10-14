@@ -1,23 +1,33 @@
 /* eslint-disable no-unused-vars */
-import { Page } from 'components';
+import { Button, Page } from 'components';
 import { useAuth, useQueryParam, useToast } from 'lib/hooks';
+import { POST } from 'lib/utils/http';
+import { URL } from 'lib/utils/url';
 import md5 from 'md5';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 const Login = () => {
-  const history = useHistory();
+  //states
   const [isLoading, setIsLoading] = useState(false);
+  // hooks
+  const history = useHistory();
   const { signIn, authData } = useAuth();
-  const { showSuccess } = useToast();
+  const { showSuccess, showError } = useToast();
   const { getParams } = useQueryParam();
-  const onLoginHandler = () => {
+  // functions
+  const onLoginHandler = async () => {
     setIsLoading(true);
-    setTimeout(() => {
-      signIn({
-        name: 'jh doee',
-        sessionId: 'ttthdnnslkdsQKLf',
-      });
-      setIsLoading(false);
+    const { data, error } = await POST(URL.login, {
+      payload: {
+        email: 'smarty.devoloper@gmail.com',
+        password: md5('12345'),
+      },
+    });
+    setIsLoading(false);
+    if (error) {
+      showError(error);
+    } else {
+      signIn(data.user);
       showSuccess('Loggedin successfully!');
       const redirectUrl = getParams('redirect');
       if (redirectUrl) {
@@ -25,20 +35,22 @@ const Login = () => {
       } else {
         history.replace('/');
       }
-    }, 2000);
+    }
   };
+  // lifecycle hook
   useEffect(() => {
     if (authData) {
       history.replace('/');
     }
   }, []);
+  // render html
   return (
     <Page>
       Login Here
       <br />
       {isLoading && <p>Loading...</p>}
       <br />
-      <button onClick={onLoginHandler}>Login</button>
+      <Button onClick={onLoginHandler}>Login</Button>
     </Page>
   );
 };
