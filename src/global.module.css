@@ -1,0 +1,15 @@
+.appOverlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.appContent {
+  height: auto !important;
+  width: auto !important;
+  font-weight: bold;
+  padding: 30px;
+}
+
+.appContent p {
+  margin-bottom: 0px;
+  margin-top: 5px;
+}

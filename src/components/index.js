@@ -1,6 +1,24 @@
+/* eslint-disable simple-import-sort/imports */
+// auth components
 import { ProtectedRoute, RouteList } from './Auth';
-import Button from './Button/Button';
+
+// page components
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import Page from './Layout/Page';
 
-export { Page, ErrorBoundary, RouteList, ProtectedRoute, Button };
+// attom components
+import Button from './Button/Button';
+import Input from './Input/Input';
+import Modal from './Modal/Modal';
+import Footer from './Footer/Footer';
+
+export {
+  Page,
+  ErrorBoundary,
+  RouteList,
+  ProtectedRoute,
+  Button,
+  Input,
+  Modal,
+  Footer,
+};

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { ErrorBoundary } from 'components';
 import { AuthProvider } from 'lib/context/authContext';
 import { LangProvider } from 'lib/context/langContext';

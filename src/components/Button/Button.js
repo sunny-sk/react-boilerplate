@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import Classes from './Button.module.css';
@@ -16,3 +16,13 @@ const Button = ({ children, title, className, ...props }) => {
 };
 
 export default Button;
+Button.displayName = 'Button';
+Button.propTypes = {
+  title: PropTypes.string,
+  className: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.elementType,
+    PropTypes.element,
+  ]),
+};

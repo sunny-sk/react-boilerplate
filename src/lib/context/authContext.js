@@ -1,8 +1,11 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import { Modal } from 'components';
 import { USER_LOCALSTORAE_KEY } from 'lib/constants/constant';
 import { useLocaStorage, useToast } from 'lib/hooks';
+import PropTypes from 'prop-types';
 import React, { createContext, useEffect, useState } from 'react';
 
+import Classes from '../../global.module.css';
 export const AuthContext = createContext({
   authData: null,
   errorMessage: null,
@@ -23,26 +26,29 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const loadStorageData = async () => {
-    try {
-      // Try get the data from Local Storage
-      const _authData = getItem(USER_LOCALSTORAE_KEY);
-      if (_authData) {
-        const { error } = { error: null }; // call webIndex api here
-        if (error) {
-          showError('Session Expired, Please login again');
-          setLoading(false);
-        } else {
-          signIn({ ..._authData });
-          setLoading(false);
-        }
-      } else {
-        setLoading(false);
-        setAuthData(undefined);
-      }
-    } catch (error) {
+    setTimeout(() => {
       setLoading(false);
-      showError(error.message);
-    }
+    }, 1000);
+    // try {
+    //   // Try get the data from Local Storage
+    //   const _authData = getItem(USER_LOCALSTORAE_KEY);
+    //   if (_authData) {
+    //     const { error } = { error: null }; // call webIndex api here
+    //     if (error) {
+    //       showError('Session Expired, Please login again');
+    //       setLoading(false);
+    //     } else {
+    //       signIn({ ..._authData });
+    //       setLoading(false);
+    //     }
+    //   } else {
+    //     setLoading(false);
+    //     setAuthData(undefined);
+    //   }
+    // } catch (error) {
+    //   setLoading(false);
+    //   showError(error.message);
+    // }
   };
 
   const signIn = (authData) => {
@@ -72,7 +78,28 @@ export const AuthProvider = ({ children }) => {
     //This component will be used to encapsulate the whole App for auth data,
     <>
       {loading ? (
-        <>{/* add loader here */}</>
+        <>
+          <Modal
+            contentClasses={`${Classes.appContent} text-center`}
+            overlayClasses={Classes.appOverlay}
+            isOpen={loading}>
+            <div className="lds-spinner">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <p>Please wait...</p>
+          </Modal>
+        </>
       ) : (
         <AuthContext.Provider
           value={{
@@ -89,4 +116,11 @@ export const AuthProvider = ({ children }) => {
       )}
     </>
   );
+};
+AuthProvider.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.elementType,
+    PropTypes.element,
+  ]),
 };

@@ -7,10 +7,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import App from './App';
-import history from './history.js';
 
 render(
-  <BrowserRouter history={history}>
+  <BrowserRouter>
     <ToastContainer />
     <App />
   </BrowserRouter>,

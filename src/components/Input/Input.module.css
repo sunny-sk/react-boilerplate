@@ -1,0 +1,30 @@
+.inputCon {
+}
+
+.inputGroup {
+  border: 1px solid #c6c6c6;
+  border-radius: 4px;
+}
+.inputGroup:focus-within {
+  border: 1px solid #0069d9 !important;
+}
+.inputPrependText {
+  background-color: transparent;
+  border: none;
+}
+.inputPostpendText {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.input {
+  outline: none;
+  border: none;
+}
+
+.input:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}

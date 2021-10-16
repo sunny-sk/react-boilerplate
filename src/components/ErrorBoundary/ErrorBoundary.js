@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 
 class ErrorBoundary extends React.Component {
@@ -9,11 +8,13 @@ class ErrorBoundary extends React.Component {
   }
 
   static getDerivedStateFromError(error) {
+    console.log(error);
     // Update state so the next render will show the fallback UI.
     return { hasError: true };
   }
 
   componentDidCatch(error, errorInfo) {
+    console.log(error, errorInfo);
     // You can also log the error to an error reporting service
     // logErrorToMyService(error, errorInfo);
   }
@@ -32,8 +33,12 @@ class ErrorBoundary extends React.Component {
       );
     }
 
-    return this.props.children;
+    return <>{this.props.children}</>;
   }
 }
 
 export default ErrorBoundary;
+ErrorBoundary.displayName = 'ErrorBoundary';
+ErrorBoundary.propTypes = {
+  children: PropTypes.element.isRequired,
+};

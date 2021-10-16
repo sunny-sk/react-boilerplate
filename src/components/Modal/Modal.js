@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { createPortal } from 'react-dom';
@@ -21,7 +20,9 @@ const Modal = (props) => {
     if (props.disableOverClose) {
       //
     } else {
-      props.onClose();
+      if (props.onClose) {
+        props.onClose(false);
+      }
     }
   };
 
