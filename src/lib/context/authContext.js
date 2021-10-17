@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Modal } from 'components';
-import { USER_LOCALSTORAE_KEY } from 'lib/constants/constant';
+import { USER_LOCALSTORAE_KEY } from 'lib/constants';
 import { useLocaStorage, useToast } from 'lib/hooks';
 import PropTypes from 'prop-types';
 import React, { createContext, useEffect, useState } from 'react';
@@ -26,29 +26,26 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const loadStorageData = async () => {
-    setTimeout(() => {
+    try {
+      // Try get the data from Local Storage
+      const _authData = getItem(USER_LOCALSTORAE_KEY);
+      if (_authData) {
+        const { error } = { error: null }; // call webIndex api here
+        if (error) {
+          showError('Session Expired, Please login again');
+          setLoading(false);
+        } else {
+          signIn({ ..._authData });
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
+        setAuthData(undefined);
+      }
+    } catch (error) {
       setLoading(false);
-    }, 1000);
-    // try {
-    //   // Try get the data from Local Storage
-    //   const _authData = getItem(USER_LOCALSTORAE_KEY);
-    //   if (_authData) {
-    //     const { error } = { error: null }; // call webIndex api here
-    //     if (error) {
-    //       showError('Session Expired, Please login again');
-    //       setLoading(false);
-    //     } else {
-    //       signIn({ ..._authData });
-    //       setLoading(false);
-    //     }
-    //   } else {
-    //     setLoading(false);
-    //     setAuthData(undefined);
-    //   }
-    // } catch (error) {
-    //   setLoading(false);
-    //   showError(error.message);
-    // }
+      showError(error.message);
+    }
   };
 
   const signIn = (authData) => {

@@ -45,7 +45,7 @@ const Login = () => {
   }, []);
   // render html
   return (
-    <Page>
+    <Page pageTitle="Login">
       Login Here
       <br />
       {isLoading && <p>Loading...</p>}

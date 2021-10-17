@@ -1,6 +1,6 @@
 // need to add logic
 /* eslint-disable react/prop-types */
-import { LANGS, USER_LANG_KEY } from 'lib/constants/constant';
+import { LANGS, USER_LANG_KEY } from 'lib/constants';
 import { useLocaStorage } from 'lib/hooks';
 import React, { createContext, useEffect, useState } from 'react';
 

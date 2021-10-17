@@ -13,7 +13,7 @@ const Home = () => {
   };
 
   return (
-    <Page>
+    <Page pageTitle="Home">
       <div className="container">
         <Modal isOpen={showModal} onClose={setShowModal}>
           modal content

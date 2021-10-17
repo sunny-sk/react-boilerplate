@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { USER_LOCALSTORAE_KEY } from 'lib/constants/constant';
+import { USER_LOCALSTORAE_KEY } from 'lib/constants';
 
 const GET = async (URL, { authenticate }) => {
   try {

@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Page } from 'components';
-import { Input } from 'components';
+import { Button, Input, Page } from 'components';
 import { useAuth, useQueryParam, useToast } from 'lib/hooks';
 import { registerSchema } from 'lib/utils/validation';
 import md5 from 'md5';
