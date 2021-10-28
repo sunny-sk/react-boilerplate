@@ -4,7 +4,11 @@ import React from 'react';
 
 import Classes from './Footer.module.css';
 const Footer = () => {
-  return <footer>This is footer</footer>;
+  return (
+    <footer className="jumbotron">
+      <h6 className="text-center">@copyrighted 2021</h6>
+    </footer>
+  );
 };
 
 export default Footer;

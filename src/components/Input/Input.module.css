@@ -21,6 +21,7 @@
 .input {
   outline: none;
   border: none;
+  padding-bottom: 7px;
 }
 
 .input:focus {

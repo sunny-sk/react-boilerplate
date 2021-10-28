@@ -1,14 +1,44 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import { USER_LOCALSTORAE_KEY } from 'lib/constants';
+import { URL } from 'lib/utils/url';
 
-const GET = async (URL, { authenticate }) => {
+// error message rectifier
+const handleError = (err) => {
+  const code = err?.response?.data?.code || 999;
+  switch (code) {
+    case 500:
+      return 'Some error has occured!, please try again later.'; //Server error
+    case 400:
+      return 'Some error has occured!, please try changing inputs'; //Invalid params, bad request
+    case 404:
+      return err?.response?.data?.message || 'Not found';
+    case 422:
+      return err?.response?.data?.message || 'Already taken';
+    case 401:
+      return 'Something is wrong! Try after signing in again'; //Access denied
+    default:
+      return 'Some error has occured!, please try again later.';
+  }
+};
+
+// get method
+/**
+ * @param {String} URL
+ * @param {Object} options
+ * @param {Boolean} options.auth
+ * @returns Prmoise
+ */
+const GET = async (URL, options = {}) => {
   try {
     const headers = {
       'Content-Type': 'application/json',
     };
-    if (authenticate) {
-      const authData = JSON.parse(localStorage.getItem(USER_LOCALSTORAE_KEY));
-      headers['Authorization'] = authData.token;
+    if (options.auth) {
+      const token = JSON.parse(
+        localStorage.getItem(USER_LOCALSTORAE_KEY)
+      ).token;
+      headers['Authorization'] = token;
     }
     const { data } = await axios.get(URL, {
       ...headers,
@@ -19,28 +49,45 @@ const GET = async (URL, { authenticate }) => {
     };
   } catch (error) {
     return {
-      error: error,
+      error: handleError(error),
       data: null,
     };
   }
 };
+// post method
+/**
+ * @param {String} URL
+ * @param {Object} options
+ * @param {Boolean} options.auth
+ * @param {Object} options.headers
+ * @param {Object} options.payload
+ * @returns Promise
+ */
 const POST = async (
   URL,
-  { authenticate, payload = {}, headers: customHeaders = {} }
+  options = {
+    auth: false,
+    headers: {},
+    payload: {},
+  }
 ) => {
   try {
-    const headers = {
+    let headers = {
       'Content-Type': 'application/json',
-      ...customHeaders,
     };
+    if (options.headers) {
+      headers = { ...headers, ...options.headers };
+    }
 
-    if (authenticate) {
-      const authData = JSON.parse(localStorage.getItem(USER_LOCALSTORAE_KEY));
-      headers['Authorization'] = authData.token;
+    if (options.auth) {
+      const token = JSON.parse(
+        localStorage.getItem(USER_LOCALSTORAE_KEY)
+      ).token;
+      headers['Authorization'] = token;
     }
     const { data } = await axios.post(
       URL,
-      { ...payload },
+      { ...options.payload },
       {
         ...headers,
       }
@@ -58,10 +105,26 @@ const POST = async (
     }
   } catch (error) {
     return {
-      error: error.response.data.message,
+      error: handleError(error),
       data: null,
     };
   }
 };
 
-export { GET, POST };
+// =============  api functions ==================
+const loginApi = async (payload) => {
+  return POST(URL.login, {
+    options: {
+      payload,
+    },
+  });
+};
+
+const registerApi = async (payload) => {
+  return POST(URL.register, {
+    options: {
+      payload,
+    },
+  });
+};
+export { loginApi, registerApi };

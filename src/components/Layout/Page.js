@@ -1,9 +1,15 @@
-import { Footer } from 'components';
+import { Footer, Header } from 'components';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
-const Page = ({ pageTitle, pageDescription, children, footer = true }) => {
+const Page = ({
+  pageTitle,
+  pageDescription,
+  children,
+  footer = true,
+  header = true,
+}) => {
   return (
     <>
       {(pageTitle || pageDescription) && (
@@ -14,7 +20,9 @@ const Page = ({ pageTitle, pageDescription, children, footer = true }) => {
           )}
         </Helmet>
       )}
-      {children}
+      {header && <Header />}
+      <div className="container">{children}</div>
+      <br />
       {footer && <Footer />}
     </>
   );
@@ -25,6 +33,7 @@ Page.displayName = 'Page';
 Page.propTypes = {
   pageTitle: PropTypes.string,
   pageDescription: PropTypes.string,
+  header: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.elementType,

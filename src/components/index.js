@@ -11,6 +11,7 @@ import Button from './Button/Button';
 import Input from './Input/Input';
 import Modal from './Modal/Modal';
 import Footer from './Footer/Footer';
+import Header from './Header/Header';
 
 export {
   Page,
@@ -21,4 +22,5 @@ export {
   Input,
   Modal,
   Footer,
+  Header,
 };
