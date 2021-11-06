@@ -1,4 +1,4 @@
-const APP_NAME = 'REACT_TEMP';
+export const APP_NAME = 'REACT_TEMP';
 export const USER_LOCALSTORAE_KEY = `${APP_NAME}_AUTH_REACT`;
 export const USER_LANG_KEY = `${APP_NAME}_LANG_REACT`;
 export const LANGS = {
@@ -8,4 +8,12 @@ export const TOAST_CONFIG = {
   progress: 0,
   autoDismissTimeout: 2500,
   hideProgressBar: true,
+};
+
+export default {
+  APP_NAME,
+  USER_LOCALSTORAE_KEY,
+  USER_LANG_KEY,
+  LANGS,
+  TOAST_CONFIG,
 };

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TOAST_CONFIG, USER_LOCALSTORAE_KEY } from 'lib/constants';
+import { TOAST_CONFIG, USER_LOCALSTORAE_KEY } from 'constant';
 import { toast } from 'react-toastify';
 import { BASE_URL } from 'utils/url';
 

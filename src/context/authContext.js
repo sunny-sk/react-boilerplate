@@ -1,11 +1,10 @@
 import { Modal } from 'components';
+import { USER_LOCALSTORAE_KEY } from 'constant';
+import Classes from 'global.module.css';
 import { useLocaStorage, useToast } from 'hooks';
-import { USER_LOCALSTORAE_KEY } from 'lib/constants';
 import PropTypes from 'prop-types';
 import React, { createContext, useEffect, useState } from 'react';
 import { webIndexApi } from 'utils/http';
-
-import Classes from '../../global.module.css';
 export const AuthContext = createContext({
   authData: null,
   errorMessage: null,
@@ -33,7 +32,6 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
       const { error, data } = await webIndexApi(); // call webIndex api here
       if (error) {
-        showError('Session Expired, Please login again');
         setLoading(false);
       } else {
         signIn({ ..._authData, ...data.data });

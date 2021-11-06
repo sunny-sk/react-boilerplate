@@ -1,8 +1,8 @@
 import 'react-toastify/dist/ReactToastify.min.css';
 
 import { ErrorBoundary } from 'components';
-import { AuthProvider } from 'lib/context/authContext';
-import { LangProvider } from 'lib/context/langContext';
+import { AuthProvider } from 'context/authContext';
+import { LangProvider } from 'context/langContext';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import Router from 'router';

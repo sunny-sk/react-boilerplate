@@ -1,7 +1,7 @@
 // need to add logic
-/* eslint-disable react/prop-types */
+import { LANGS, USER_LANG_KEY } from 'constant';
 import { useLocaStorage } from 'hooks';
-import { LANGS, USER_LANG_KEY } from 'lib/constants';
+import PropTypes from 'prop-types';
 import React, { createContext, useEffect, useState } from 'react';
 
 export const LangContext = createContext({
@@ -51,4 +51,13 @@ export const LangProvider = ({ children }) => {
       {children}
     </LangContext.Provider>
   );
+};
+
+LangProvider.displayName = 'LangProvider';
+LangProvider.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.elementType,
+    PropTypes.element,
+  ]),
 };

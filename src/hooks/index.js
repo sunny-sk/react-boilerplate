@@ -1,6 +1,6 @@
-import { TOAST_CONFIG } from 'lib/constants';
-import { AuthContext } from 'lib/context/authContext';
-import { LangContext } from 'lib/context/langContext';
+import { TOAST_CONFIG } from 'constant';
+import { AuthContext } from 'context/authContext';
+import { LangContext } from 'context/langContext';
 import { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
