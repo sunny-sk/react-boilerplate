@@ -1,3 +1,4 @@
+import { Icon } from 'components';
 import PropTypes from 'prop-types';
 import React, { forwardRef, useState } from 'react';
 
@@ -47,9 +48,9 @@ const InputComp = forwardRef(
                   onClick={() => setShowPassword(!showPassword)}
                   className={`input-group-text ${Classes.inputPostpendText}`}>
                   {showPassword ? (
-                    <i className="fas fa-eye-slash"></i>
+                    <Icon name="AiOutlineEyeInvisible" size={23} />
                   ) : (
-                    <i className="fas fa-eye"></i>
+                    <Icon name="AiOutlineEye" size={23} />
                   )}
                 </div>
               ) : (

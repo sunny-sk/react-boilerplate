@@ -1,16 +1,30 @@
+import 'react-toastify/dist/ReactToastify.min.css';
+
 import { ErrorBoundary } from 'components';
 import { AuthProvider } from 'lib/context/authContext';
 import { LangProvider } from 'lib/context/langContext';
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
 import Router from 'router';
 function App() {
   return (
     <ErrorBoundary>
-      <LangProvider>
-        <AuthProvider>
-          <Router />
-        </AuthProvider>
-      </LangProvider>
+      <>
+        <ToastContainer
+          position="top-right"
+          hideProgressBar
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable={false}
+        />
+        <LangProvider>
+          <AuthProvider>
+            <Router />
+          </AuthProvider>
+        </LangProvider>
+      </>
     </ErrorBoundary>
   );
 }

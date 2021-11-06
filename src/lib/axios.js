@@ -1,26 +1,13 @@
-/* eslint-disable no-unused-vars */
 import axios from 'axios';
-import { USER_LOCALSTORAE_KEY } from 'lib/constants';
-import { URL } from 'lib/utils/url';
+import { TOAST_CONFIG, USER_LOCALSTORAE_KEY } from 'lib/constants';
+import { toast } from 'react-toastify';
+import { BASE_URL } from 'utils/url';
 
-// error message rectifier
-const handleError = (err) => {
-  const code = err?.response?.data?.code || 999;
-  switch (code) {
-    case 500:
-      return 'Some error has occured!, please try again later.'; //Server error
-    case 400:
-      return 'Some error has occured!, please try changing inputs'; //Invalid params, bad request
-    case 404:
-      return err?.response?.data?.message || 'Not found';
-    case 422:
-      return err?.response?.data?.message || 'Already taken';
-    case 401:
-      return 'Something is wrong! Try after signing in again'; //Access denied
-    default:
-      return 'Some error has occured!, please try again later.';
-  }
-};
+import { handleError } from '../utils/helper';
+
+axios.defaults.baseURL = BASE_URL;
+axios.defaults.timeout = 4500;
+axios.defaults.headers['Content-type'] = 'application/json';
 
 // get method
 /**
@@ -29,7 +16,7 @@ const handleError = (err) => {
  * @param {Boolean} options.auth
  * @returns Prmoise
  */
-const GET = async (URL, options = {}) => {
+export const GET = async (URL, options = {}) => {
   try {
     const headers = {
       'Content-Type': 'application/json',
@@ -48,6 +35,7 @@ const GET = async (URL, options = {}) => {
       error: null,
     };
   } catch (error) {
+    toast.error(handleError(error), { ...TOAST_CONFIG });
     return {
       error: handleError(error),
       data: null,
@@ -63,7 +51,7 @@ const GET = async (URL, options = {}) => {
  * @param {Object} options.payload
  * @returns Promise
  */
-const POST = async (
+export const POST = async (
   URL,
   options = {
     auth: false,
@@ -85,6 +73,7 @@ const POST = async (
       ).token;
       headers['Authorization'] = token;
     }
+
     const { data } = await axios.post(
       URL,
       { ...options.payload },
@@ -92,6 +81,7 @@ const POST = async (
         ...headers,
       }
     );
+
     if (data.success) {
       return {
         data,
@@ -104,27 +94,13 @@ const POST = async (
       };
     }
   } catch (error) {
+    // toast.error(handleError(error), { ...TOAST_CONFIG });
+    toast.error(error.response.data.message, { ...TOAST_CONFIG });
     return {
-      error: handleError(error),
+      error: error.response.data.message,
       data: null,
     };
   }
 };
 
-// =============  api functions ==================
-const loginApi = async (payload) => {
-  return POST(URL.login, {
-    options: {
-      payload,
-    },
-  });
-};
-
-const registerApi = async (payload) => {
-  return POST(URL.register, {
-    options: {
-      payload,
-    },
-  });
-};
-export { loginApi, registerApi };
+export default axios;

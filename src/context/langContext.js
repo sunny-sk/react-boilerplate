@@ -1,7 +1,7 @@
 // need to add logic
 /* eslint-disable react/prop-types */
+import { useLocaStorage } from 'hooks';
 import { LANGS, USER_LANG_KEY } from 'lib/constants';
-import { useLocaStorage } from 'lib/hooks';
 import React, { createContext, useEffect, useState } from 'react';
 
 export const LangContext = createContext({

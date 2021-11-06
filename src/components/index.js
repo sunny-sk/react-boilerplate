@@ -12,6 +12,7 @@ import Input from './Input/Input';
 import Modal from './Modal/Modal';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
+import Icon from './Icon/Icon';
 
 export {
   Page,
@@ -23,4 +24,5 @@ export {
   Modal,
   Footer,
   Header,
+  Icon,
 };

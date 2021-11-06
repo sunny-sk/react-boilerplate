@@ -10,6 +10,11 @@
     "plugin:react/recommended",
     "plugin:prettier/recommended"
   ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -19,6 +24,8 @@
   },
   "plugins": ["react", "simple-import-sort"],
   "rules": {
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
     "display-name": ["off", { "ignoreTranspilerName": true }],
     "sort-vars": "error",
     "semi": ["error", "always"],

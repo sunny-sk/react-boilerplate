@@ -27,6 +27,7 @@ Dillinger uses a number of open source projects to work properly:
 - [javascript] - for writing business logic
 - [jsx] - for writing components
 - [Bootstrap] - great UI boilerplate for modern web apps
+- [ReactIcons] - for supporting rich icons
 
 ## Installation
 

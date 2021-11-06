@@ -1,5 +1,5 @@
 import { Modal, Page } from 'components';
-import { useAuth } from 'lib/hooks';
+import { useAuth } from 'hooks';
 import React, { useState } from 'react';
 
 const Home = () => {

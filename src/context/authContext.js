@@ -1,9 +1,9 @@
-/* eslint-disable no-unused-vars */
 import { Modal } from 'components';
+import { useLocaStorage, useToast } from 'hooks';
 import { USER_LOCALSTORAE_KEY } from 'lib/constants';
-import { useLocaStorage, useToast } from 'lib/hooks';
 import PropTypes from 'prop-types';
 import React, { createContext, useEffect, useState } from 'react';
+import { webIndexApi } from 'utils/http';
 
 import Classes from '../../global.module.css';
 export const AuthContext = createContext({
@@ -17,34 +17,31 @@ export const AuthContext = createContext({
 });
 
 export const AuthProvider = ({ children }) => {
-  const { showError, showSuccess } = useToast();
-  const { getItem, setItem, removeItem } = useLocaStorage();
   // states
-
+  const { showError, showSuccess } = useToast();
   const [authData, setAuthData] = useState();
-  //The loading part will be explained in the persist step session
-  const [loading, setLoading] = useState(true);
+  //The loading part will be shown in the persist session
+  const [loading, setLoading] = useState(false);
+
+  // hooks
+  const { getItem, setItem, removeItem } = useLocaStorage();
 
   const loadStorageData = async () => {
-    try {
-      // Try get the data from Local Storage
-      const _authData = getItem(USER_LOCALSTORAE_KEY);
-      if (_authData) {
-        const { error } = { error: null }; // call webIndex api here
-        if (error) {
-          showError('Session Expired, Please login again');
-          setLoading(false);
-        } else {
-          signIn({ ..._authData });
-          setLoading(false);
-        }
-      } else {
+    // get the data from Local Storage
+    const _authData = getItem(USER_LOCALSTORAE_KEY);
+    if (_authData) {
+      setLoading(true);
+      const { error, data } = await webIndexApi(); // call webIndex api here
+      if (error) {
+        showError('Session Expired, Please login again');
         setLoading(false);
-        setAuthData(undefined);
+      } else {
+        signIn({ ..._authData, ...data.data });
+        setLoading(false);
       }
-    } catch (error) {
+    } else {
       setLoading(false);
-      showError(error.message);
+      setAuthData(undefined);
     }
   };
 

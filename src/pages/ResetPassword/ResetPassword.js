@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, Page } from 'components';
-import { useQueryParam, useToast } from 'lib/hooks';
-import { resetPasswordSchema } from 'lib/utils/validation';
+import { useQueryParam, useToast } from 'hooks';
 import md5 from 'md5';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import { resetPasswordSchema } from 'utils/validation';
 const ResetPassword = () => {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);

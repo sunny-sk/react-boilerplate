@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { useAuth } from 'lib/hooks';
+import { useAuth } from 'hooks';
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 

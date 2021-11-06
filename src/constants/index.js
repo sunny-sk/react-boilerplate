@@ -4,3 +4,8 @@ export const USER_LANG_KEY = `${APP_NAME}_LANG_REACT`;
 export const LANGS = {
   EN: 'en',
 };
+export const TOAST_CONFIG = {
+  progress: 0,
+  autoDismissTimeout: 2500,
+  hideProgressBar: true,
+};

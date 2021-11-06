@@ -1,3 +1,4 @@
+import { TOAST_CONFIG } from 'lib/constants';
 import { AuthContext } from 'lib/context/authContext';
 import { LangContext } from 'lib/context/langContext';
 import { useContext } from 'react';
@@ -28,22 +29,15 @@ export const useLang = () => {
 };
 
 export const useToast = () => {
-  const showError = (message, opts) => {
-    toast.error(
-      message,
-      opts
-        ? opts
-        : { progress: 0, autoDismissTimeout: 2500, hideProgressBar: true }
-    );
+  const showError = (message, opts = {}) => {
+    toast.error(message, { ...TOAST_CONFIG, ...opts });
   };
 
   const showSuccess = (message, opts) => {
-    toast.success(
-      message,
-      opts
-        ? opts
-        : { progress: 0, autoDismissTimeout: 2500, hideProgressBar: true }
-    );
+    toast.success(message, {
+      ...TOAST_CONFIG,
+      ...opts,
+    });
   };
 
   return {

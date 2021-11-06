@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Input, Page } from 'components';
-import { useAuth, useQueryParam, useToast } from 'lib/hooks';
-import { registerSchema } from 'lib/utils/validation';
+import { Button, Icon, Input, Page } from 'components';
+import { useAuth, useQueryParam, useToast } from 'hooks';
 import md5 from 'md5';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import { registerSchema } from 'utils/validation';
 const Register = () => {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
@@ -28,8 +28,8 @@ const Register = () => {
     setIsLoading(true);
     setTimeout(() => {
       signIn({
-        name: 'sunny',
-        sessionId: 'ttthdnnslkdsQKLf',
+        name: 'smarty.devoloper@gmail.com',
+        sessionId: '12345',
       });
 
       setIsLoading(false);
@@ -60,6 +60,7 @@ const Register = () => {
             <div className="col-6 offset-sm-3">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Input
+                  autoFocus
                   defaultValue=""
                   placeholder="name@example.com"
                   label="Email address"
@@ -67,7 +68,7 @@ const Register = () => {
                   name="userEmail"
                   {...register('userEmail')}
                   type="text"
-                  leftIcon={<i className="fas fa-envelope"></i>}
+                  leftIcon={<Icon name="MdOutlineMail" size={23} />}
                 />
                 <Input
                   defaultValue=""
@@ -78,8 +79,7 @@ const Register = () => {
                   name="password"
                   {...register('password')}
                   error={errors.password?.message}
-                  leftIcon={<i className="fas fa-key"></i>}
-                  rightIcon={<i className="fas fa-eye"></i>}
+                  leftIcon={<Icon name="RiLockPasswordFill" size={23} />}
                 />
                 <br />
                 <br />

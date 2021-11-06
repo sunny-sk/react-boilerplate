@@ -1,9 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, Page } from 'components';
-import { useToast } from 'lib/hooks';
-import { emailSchema } from 'lib/utils/validation';
+import { useToast } from 'hooks';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { emailSchema } from 'utils/validation';
 const ForgotPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { showSuccess } = useToast();
