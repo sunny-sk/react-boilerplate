@@ -1,23 +1,15 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { Transition } from 'react-transition-group';
 
 import classes from './Modal.module.css';
-const duration = 500;
+const duration = 400; // should be less then the animation timeout
 const body = document.body;
-
-const Overlay = (props) => {
-  return <div onClick={props.onClick} className={props.overlayClasses} />;
-};
-
-const Content = (props) => {
-  return <div className={props.contentClasses}>{props.children}</div>;
-};
 
 const Modal = (props) => {
   const onClickOverlayHandler = () => {
-    if (props.disableOverClose) {
+    if (props.disableOverlayClose) {
       //
     } else {
       if (props.onClose) {
@@ -36,7 +28,7 @@ const Modal = (props) => {
             : state === 'exiting'
             ? classes.reAnimate
             : null,
-          props.contentClasses,
+          props.contentClassName,
         ];
         const finalOverlayClasses = [
           classes.overlay,
@@ -45,20 +37,21 @@ const Modal = (props) => {
             : state === 'exiting'
             ? classes.reAnimate
             : null,
-          props.overlayClasses,
+          props.overlayClassName,
         ];
         return (
           <>
             {createPortal(
-              <Overlay
-                overlayClasses={finalOverlayClasses.join(' ')}
-                onClick={onClickOverlayHandler}></Overlay>,
+              <div
+                onClick={onClickOverlayHandler}
+                className={finalOverlayClasses.join(' ')}
+              />,
               body
             )}
             {createPortal(
-              <Content contentClasses={finalContentClasses.join(' ')}>
+              <div className={finalContentClasses.join(' ')}>
                 {props.children}
-              </Content>,
+              </div>,
               body
             )}
           </>
@@ -68,7 +61,21 @@ const Modal = (props) => {
   );
 };
 
-export default Modal;
+export default React.memo(Modal);
+
+Modal.displayName = 'Modal';
+Modal.propTypes = {
+  isOpen: PropTypes.bool,
+  disableOverlayClose: PropTypes.bool,
+  onClose: PropTypes.func,
+  contentClassName: PropTypes.string,
+  overlayClassName: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.elementType,
+    PropTypes.element,
+  ]),
+};
 
 // example:
 // <Modal overlayClasses disableOverClose={true} isOpen={false} onClose={() => {}}>

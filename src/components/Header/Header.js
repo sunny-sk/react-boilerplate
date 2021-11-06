@@ -9,7 +9,4 @@ const Header = () => {
 
 export default Header;
 Header.displayName = 'Header';
-Header.propTypes = {
-  src: PropTypes.string,
-  alt: PropTypes.string,
-};
+Header.propTypes = {};

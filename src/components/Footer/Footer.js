@@ -13,7 +13,4 @@ const Footer = () => {
 
 export default Footer;
 Footer.displayName = 'Footer';
-Footer.propTypes = {
-  src: PropTypes.string,
-  alt: PropTypes.string,
-};
+Footer.propTypes = {};

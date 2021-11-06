@@ -10,6 +10,11 @@ const Page = ({
   footer = true,
   header = true,
 }) => {
+  if (!pageTitle || !children) {
+    throw new Error(
+      'Missing pageTitle or children to the custom Page component'
+    );
+  }
   return (
     <>
       {(pageTitle || pageDescription) && (

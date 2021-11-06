@@ -47,6 +47,9 @@ const AllIcons = {
 };
 
 const IconComp = ({ name, ...props }) => {
+  if (!name) {
+    throw new Error('Missing name props to the icon component');
+  }
   const Icon = AllIcons[name];
   return <Icon {...props} />;
 };
