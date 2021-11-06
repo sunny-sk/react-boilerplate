@@ -1,6 +1,6 @@
-import { Icon } from 'components';
 import PropTypes from 'prop-types';
 import React, { forwardRef, useState } from 'react';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 import Classes from './Input.module.css';
 const InputComp = forwardRef(
@@ -8,7 +8,6 @@ const InputComp = forwardRef(
     {
       inputClassName,
       inputConClassName,
-      inputGroupClassName,
       leftIcon,
       rightIcon,
       label,
@@ -28,8 +27,7 @@ const InputComp = forwardRef(
         <div className={`input-group mb-2 ${Classes.inputGroup}`}>
           {leftIcon && (
             <div className={'input-group-prepend'}>
-              <div
-                className={`input-group-text ${Classes.inputPrependText} ${inputGroupClassName}`}>
+              <div className={`input-group-text ${Classes.inputPrependText}`}>
                 {leftIcon}
               </div>
             </div>
@@ -47,11 +45,7 @@ const InputComp = forwardRef(
                 <div
                   onClick={() => setShowPassword(!showPassword)}
                   className={`input-group-text ${Classes.inputPostpendText}`}>
-                  {showPassword ? (
-                    <Icon name="AiOutlineEyeInvisible" size={23} />
-                  ) : (
-                    <Icon name="AiOutlineEye" size={23} />
-                  )}
+                  {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
                 </div>
               ) : (
                 <div

@@ -4,6 +4,7 @@ import { ErrorBoundary } from 'components';
 import { AuthProvider } from 'context/authContext';
 import { LangProvider } from 'context/langContext';
 import React from 'react';
+import { IconContext } from 'react-icons';
 import { ToastContainer } from 'react-toastify';
 import Router from 'router';
 function App() {
@@ -19,11 +20,13 @@ function App() {
           pauseOnFocusLoss={false}
           draggable={false}
         />
-        <LangProvider>
-          <AuthProvider>
-            <Router />
-          </AuthProvider>
-        </LangProvider>
+        <IconContext.Provider value={{ size: 23 }}>
+          <LangProvider>
+            <AuthProvider>
+              <Router />
+            </AuthProvider>
+          </LangProvider>
+        </IconContext.Provider>
       </>
     </ErrorBoundary>
   );

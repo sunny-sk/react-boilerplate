@@ -11,6 +11,7 @@
 .inputPrependText {
   background-color: transparent;
   border: none;
+  padding-right: 0px;
 }
 .inputPostpendText {
   background-color: transparent;
@@ -21,8 +22,8 @@
 .input {
   outline: none;
   border: none;
-  padding-bottom: 7px;
-  padding-left: 0px;
+  padding-bottom: 8px;
+  /* padding-left: 0px; */
 }
 
 .input:focus {

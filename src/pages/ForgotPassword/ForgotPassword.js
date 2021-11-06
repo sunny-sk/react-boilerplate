@@ -3,6 +3,8 @@ import { Button, Input, Page } from 'components';
 import { useToast } from 'hooks';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { MdOutlineMail } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import { emailSchema } from 'utils/validation';
 const ForgotPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +35,7 @@ const ForgotPassword = () => {
         <div className="container">
           <h1 className="text-center">Forgot Password</h1>
           <div className="row mt-3">
-            <div className="col-6 offset-sm-3">
+            <div className="col-12 col-md-6 offset-md-3">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Input
                   defaultValue=""
@@ -43,17 +45,22 @@ const ForgotPassword = () => {
                   name="email"
                   {...register('email')}
                   type="text"
-                  leftIcon={<i className="fas fa-envelope"></i>}
+                  leftIcon={<MdOutlineMail />}
                 />
-                <br />
                 <br />
                 {isLoading && <p className="text-center">Loading...</p>}
-                <Button
-                  disabled={isLoading}
-                  className="btn-block"
-                  title="Send Link"
-                  type="submit"
-                />
+                {!isLoading && (
+                  <>
+                    <Button
+                      disabled={isLoading}
+                      className="btn-block"
+                      title="Send Link"
+                      type="submit"
+                    />
+                    <br />
+                    <Link to="/login">Click here to login</Link>
+                  </>
+                )}
               </form>
             </div>
           </div>

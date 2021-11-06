@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Icon, Input, Page } from 'components';
+import { Button, Input, Page } from 'components';
 import { useAuth, useQueryParam, useToast } from 'hooks';
 import md5 from 'md5';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { MdOutlineMail } from 'react-icons/md';
+import { RiLockPasswordFill } from 'react-icons/ri';
+import { Link, useHistory } from 'react-router-dom';
 import { registerSchema } from 'utils/validation';
 const Register = () => {
   const history = useHistory();
@@ -68,7 +70,7 @@ const Register = () => {
                   name="userEmail"
                   {...register('userEmail')}
                   type="text"
-                  leftIcon={<Icon name="MdOutlineMail" size={23} />}
+                  leftIcon={<MdOutlineMail />}
                 />
                 <Input
                   defaultValue=""
@@ -79,17 +81,21 @@ const Register = () => {
                   name="password"
                   {...register('password')}
                   error={errors.password?.message}
-                  leftIcon={<Icon name="RiLockPasswordFill" size={23} />}
+                  leftIcon={<RiLockPasswordFill />}
                 />
-                <br />
-                <br />
                 {isLoading && <p className="text-center">Loading...</p>}
-                <Button
-                  disabled={isLoading}
-                  className="btn-block"
-                  title="Register"
-                  type="submit"
-                />
+                {!isLoading && (
+                  <>
+                    <Button
+                      disabled={isLoading}
+                      className="btn-block"
+                      title="Register"
+                      type="submit"
+                    />
+                    <br />
+                    <Link to="/login">Click here to Login</Link>
+                  </>
+                )}
               </form>
             </div>
           </div>

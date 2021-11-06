@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Icon, Input, Page } from 'components';
+import { Button, Input, Page } from 'components';
 import { useAuth, useQueryParam, useToast } from 'hooks';
 import md5 from 'md5';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { MdOutlineMail } from 'react-icons/md';
+import { RiLockPasswordFill } from 'react-icons/ri';
+import { Link, useHistory } from 'react-router-dom';
 import { loginApi } from 'utils/http';
 import { loginSchema } from 'utils/validation';
 const Login = () => {
@@ -34,7 +36,7 @@ const Login = () => {
       password: '12345',
     });
     setIsLoading(false);
-    console.log(data);
+    // console.log(data);
     if (data) {
       signIn(data.user);
       showSuccess('Loggedin successfully!');
@@ -66,7 +68,7 @@ const Login = () => {
                   label="Email/Username"
                   placeholder="Abc@gmail.com"
                   {...register('loginId')}
-                  leftIcon={<Icon name="MdOutlineMail" size={23} />}
+                  leftIcon={<MdOutlineMail />}
                   error={errors.loginId?.message}
                 />
               </div>
@@ -77,16 +79,23 @@ const Login = () => {
                   placeholder="Enter password here"
                   {...register('password')}
                   error={errors.password?.message}
-                  leftIcon={<Icon name="RiLockPasswordFill" size={23} />}
+                  leftIcon={<RiLockPasswordFill />}
                 />
               </div>
-              <br />
-              {isLoading ? (
-                <p>Loading...</p>
-              ) : (
-                <Button disabled={isLoading} type="submit">
-                  Login
-                </Button>
+              {isLoading && <p>Loading...</p>}
+              {!isLoading && (
+                <>
+                  <Button
+                    disabled={isLoading}
+                    className="btn-block"
+                    type="submit">
+                    Login
+                  </Button>
+                  <br />
+                  <Link to="/register">Click here to register</Link>
+                  <br />
+                  <Link to="/forgot-password">forgot password</Link>
+                </>
               )}
             </form>
           </div>
